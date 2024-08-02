@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, ImageBackground } from 'react-native';
+import Boton from './componentes/boton';
+import Input from './componentes/input';
+import ToDo from './componentes/toDo';
+import Checkbox from 'expo-checkbox';
 
-export default function App() {
+function App() {
+  const [toDo, setTD] = useState();
+  const [toDoList, setToDo] = useState([]);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ImageBackground source={require('./assets/imgFondo.jpg')} style={styles.background}>
+      <View style={styles.controlador}>
+        <Boton tipo={"agregarToDo"} toDoList={toDoList} setToDo={setToDo} toDo={toDo} />
+        <Input toDo={toDo} setTD={setTD} />
+      </View>
+      <ToDo toDoList={toDoList} setToDo={setToDo} />
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  controlador: {
+    flexDirection: 'row',
+    gap: 40,
   },
 });
+
+export default App;
